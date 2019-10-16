@@ -25,6 +25,7 @@ public class Book implements Serializable {
 	private String bookName;
 	private String bookStatus;
 	private Integer categoryId;
+	private String AuthorName;
 	
 }
 
