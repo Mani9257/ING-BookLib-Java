@@ -17,6 +17,7 @@ import com.hcl.booklib.service.LoginServiceImpl;
 
 @RestController
 @RequestMapping("/api")
+
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 public class LoginController {
 

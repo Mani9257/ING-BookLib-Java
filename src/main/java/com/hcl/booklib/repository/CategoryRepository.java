@@ -2,14 +2,19 @@
 package com.hcl.booklib.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import com.hcl.booklib.entity.Category;
 
-
-
-@Repository
+/**
+ * @author Abhishek
+ *
+ */
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
-	
-	
+
+	/**
+	 * @param CategoryId
+	 * @return
+	 */
+	Category getByCategoryId(Integer CategoryId);
+
 }

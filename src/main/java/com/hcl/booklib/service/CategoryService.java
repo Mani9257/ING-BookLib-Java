@@ -1,16 +1,20 @@
 package com.hcl.booklib.service;
 
-
-
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import com.hcl.booklib.dto.CategoryResponseDto;
+import com.hcl.booklib.entity.Category;
 
-
-
-@Service
+/**
+ * @author Abhishek
+ *
+ */
 public interface CategoryService {
-	
+
+	Category getCategoryById(Integer categoryId);
+
+	List<Category> getAllCategory();
+
 	CategoryResponseDto getCategories();
 
 }

@@ -17,7 +17,7 @@ import com.hcl.booklib.service.UserService;
 
 @RestController
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
-@RequestMapping("/")
+@RequestMapping("/api")
 public class RegistrationController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationController.class);
 

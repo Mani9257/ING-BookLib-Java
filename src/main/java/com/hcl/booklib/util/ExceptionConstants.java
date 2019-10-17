@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ExceptionConstants {
-	private ExceptionConstants()
-	{
+	private ExceptionConstants() {
 		
 	}
+
 	public static final String BORROW_BOOK_STATUS_AVAILABLE = "AVAILABLE";
 	public static final String BORROW_BOOK_STATUS_BORROWED = "BORROWED";
 	public static final String SUCCESS_MESSAGE = "SUCCESSFUL";

@@ -20,7 +20,7 @@ import com.hcl.booklib.service.DonationService;
 
 @RestController
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
-@RequestMapping("/")
+@RequestMapping("/api")
 public class DonationController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DonationController.class);
 
@@ -30,7 +30,7 @@ public class DonationController {
 	@Autowired
 	CategoryService categoryService;
 
-	@GetMapping(value = "/categories")
+	@GetMapping(value = "/donation/categories")
 	public ResponseEntity<CategoryResponseDto> getCategories() {
 		LOGGER.info("inside categories");
 		CategoryResponseDto categoryResponseDto = categoryService.getCategories();
