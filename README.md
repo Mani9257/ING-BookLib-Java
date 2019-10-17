@@ -1,1 +1,0 @@
-# ING-BookLib-Java
