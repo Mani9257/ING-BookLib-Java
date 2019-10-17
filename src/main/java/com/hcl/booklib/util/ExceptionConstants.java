@@ -15,5 +15,6 @@ public class ExceptionConstants {
 	public static final Integer DAYS_LEFT_TO_RETURN_BOOK=5;
 	public static final Integer DAYS_LEFT_TO_BORROW_BOOK = 5;
 	public static final String INVALID_CREDENTIALS_MESSAGE="User is not found";
+	public static final String BORROW_BOOK_STATUS_SUBMITTED="BOOK SUBMITTED";
 
 }

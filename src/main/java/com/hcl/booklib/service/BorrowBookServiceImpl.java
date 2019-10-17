@@ -36,45 +36,46 @@ public class BorrowBookServiceImpl implements BorrowBookService {
 		Optional<User> user = userRepository.findByUserId(userId);
 		Optional<Book> book = bookRepository.findByBookId(bookId);
 		Book book1 = book.get();
-	
+
 		BorrowResponseDTO borrowResponseDTO = new BorrowResponseDTO();
 		BookBorrow bookBorrow = new BookBorrow();
 
 		if (user.isPresent()) {
-			if(book.isPresent()) {
-			if ( book.get().getBookStatus().equalsIgnoreCase(ExceptionConstants.BORROW_BOOK_STATUS_AVAILABLE)) {
-				borrowResponseDTO.setBorrowStatus(ExceptionConstants.BORROW_BOOK_STATUS_BORROWED);
-				borrowResponseDTO.setMessage(ExceptionConstants.SUCCESS_MESSAGE);
-				borrowResponseDTO.setStatusCode(ExceptionConstants.SUCCESS_STATUS_CODE);
-				book1.setBookStatus(ExceptionConstants.BORROW_BOOK_STATUS_BORROWED);
-				bookRepository.save(book1);
+			if (book.isPresent()) {
+				if (book.get().getBookStatus().equalsIgnoreCase(ExceptionConstants.BORROW_BOOK_STATUS_AVAILABLE)) {
+					borrowResponseDTO.setBorrowStatus(ExceptionConstants.BORROW_BOOK_STATUS_BORROWED);
+					borrowResponseDTO.setMessage(ExceptionConstants.SUCCESS_MESSAGE);
+					borrowResponseDTO.setStatusCode(ExceptionConstants.SUCCESS_STATUS_CODE);
+					book1.setBookStatus(ExceptionConstants.BORROW_BOOK_STATUS_BORROWED);
+					bookRepository.save(book1);
 
-				bookBorrow.setBookName(book1.getBookName());
-				bookBorrow.setBookId(book1.getBookId());
-				bookBorrow.setBorrowStatus(ExceptionConstants.BORROW_BOOK_STATUS_BORROWED);
-				bookBorrow.setDaysLeft(ExceptionConstants.DAYS_LEFT_TO_RETURN_BOOK);
-				bookBorrow.setBorrowedDate(LocalDateTime.now());
-				bookBorrow.setUserId(userId);
-				borrowBookRepository.save(bookBorrow);
+					bookBorrow.setBookName(book1.getBookName());
+					bookBorrow.setBookId(book1.getBookId());
+					bookBorrow.setBorrowStatus(ExceptionConstants.BORROW_BOOK_STATUS_BORROWED);
+					bookBorrow.setDaysLeft(ExceptionConstants.DAYS_LEFT_TO_RETURN_BOOK);
+					bookBorrow.setBorrowedDate(LocalDateTime.now());
+					bookBorrow.setUserId(userId);
+					borrowBookRepository.save(bookBorrow);
 
-			} else  {
+				} else {
 
-				borrowResponseDTO.setBorrowStatus(ExceptionConstants.REQUEST_FOR_BORROWED_BOOK);
-				borrowResponseDTO.setMessage(ExceptionConstants.SUCCESS_MESSAGE);
-				borrowResponseDTO.setStatusCode(ExceptionConstants.SUCCESS_STATUS_CODE);
-				book1.setBookStatus(ExceptionConstants.REQUEST_FOR_BORROWED_BOOK);
-				bookRepository.save(book1);
+					borrowResponseDTO.setBorrowStatus(ExceptionConstants.REQUEST_FOR_BORROWED_BOOK);
+					borrowResponseDTO.setMessage(ExceptionConstants.SUCCESS_MESSAGE);
+					borrowResponseDTO.setStatusCode(ExceptionConstants.SUCCESS_STATUS_CODE);
+					book1.setBookStatus(ExceptionConstants.REQUEST_FOR_BORROWED_BOOK);
+					bookRepository.save(book1);
 
-				bookBorrow.setBookName(book1.getBookName());
-				bookBorrow.setBookId(book1.getBookId());
-				bookBorrow.setBorrowStatus(ExceptionConstants.REQUEST_FOR_BORROWED_BOOK);
-				bookBorrow.setBorrowedDate(LocalDateTime.now());
-				bookBorrow.setDaysLeft(ExceptionConstants.DAYS_LEFT_TO_BORROW_BOOK);
-				bookBorrow.setUserId(userId);
-				borrowBookRepository.save(bookBorrow);
+					bookBorrow.setBookName(book1.getBookName());
+					bookBorrow.setBookId(book1.getBookId());
+					bookBorrow.setBorrowStatus(ExceptionConstants.REQUEST_FOR_BORROWED_BOOK);
+					bookBorrow.setBorrowedDate(LocalDateTime.now());
+					bookBorrow.setDaysLeft(ExceptionConstants.DAYS_LEFT_TO_BORROW_BOOK);
+					bookBorrow.setUserId(userId);
+					borrowBookRepository.save(bookBorrow);
 
+				}
 			}
-		} }else {
+		} else {
 			throw new InvalidCredentialsException(ExceptionConstants.INVALID_CREDENTIALS_MESSAGE);
 		}
 		return borrowResponseDTO;
