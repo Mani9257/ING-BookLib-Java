@@ -2,6 +2,7 @@ package com.hcl.booklib.entity;
 
 import java.io.Serializable;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,8 +24,10 @@ public class Book implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer bookId;
 	private String bookName;
+	private String authorName;
 	private String bookStatus;
 	private Integer categoryId;
+
 	
 }
 

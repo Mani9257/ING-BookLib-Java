@@ -1,6 +1,7 @@
 package com.hcl.booklib.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class BookBorrow implements Serializable {
 	private Integer userId;
 	private String bookName;
 	private String borrowStatus;
+	private LocalDateTime borrowedDate;
 	private Integer daysLeft;
-	
-}
 
+}

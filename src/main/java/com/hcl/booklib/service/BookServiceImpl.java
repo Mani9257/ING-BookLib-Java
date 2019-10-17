@@ -1,9 +1,7 @@
 package com.hcl.booklib.service;
 
-import static com.hcl.booklib.constants.Constants.NO_BOOK_FOUND;
-
+import static com.hcl.booklib.constants.LibraryConstants.NO_BOOK_FOUND;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +13,7 @@ import com.hcl.booklib.repository.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Abhishek 
- * BookServiceImpl will fetch books details from bookRepository
+ * @author Abhishek BookServiceImpl will fetch books details from bookRepository
  *         by passing bookName
  *
  */
@@ -48,12 +45,15 @@ public class BookServiceImpl implements BookService {
 		return findByBookName;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.hcl.booklib.service.BookService#getBooksByCategory(java.lang.Integer)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.hcl.booklib.service.BookService#getBooksByCategory(java.lang.Integer)
 	 */
 	@Override
 	public List<Book> getBooksByCategory(Integer categoryId) {
-		log.debug("data is{}",bookRepository.findBookByCategoryId(categoryId));
+		log.debug("data is{}", bookRepository.findBookByCategoryId(categoryId));
 		return bookRepository.findBookByCategoryId(categoryId);
 	}
 
@@ -61,10 +61,5 @@ public class BookServiceImpl implements BookService {
 	public List<Book> getAllBooks() {
 		return bookRepository.findAll();
 	}
-	
-	
-	
-	
-	
 
 }
