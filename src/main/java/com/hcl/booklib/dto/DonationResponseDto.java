@@ -7,13 +7,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RegistrationResponseDto implements Serializable{
+public class DonationResponseDto implements Serializable{
 
 	private static final long serialVersionUID =1;
 
-	private Integer userId;
-	private String password;
-	private Integer statusCode;
+	private Integer bookId;
+    private Integer statusCode;
 	private String statusMessage;
 	
 }

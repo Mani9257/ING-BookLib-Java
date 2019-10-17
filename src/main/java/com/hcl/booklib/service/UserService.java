@@ -7,4 +7,6 @@ public interface UserService {
 
 	RegistrationResponseDto registration(UserDetailsDto userDetailsDto);
 
+	
+
 }

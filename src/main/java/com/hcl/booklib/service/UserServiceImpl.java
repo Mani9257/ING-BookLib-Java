@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 		LOGGER.debug("UserServiceImpl of register()");
 
 		User user = null;
-		 RegistrationResponseDto loginResponseDto1;
+		 RegistrationResponseDto loginResponseDto;
 		
 		String alphaCaps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	    String alpha = "abcdefghijklmnopqrstuvwxyz";
@@ -55,12 +55,13 @@ public class UserServiceImpl implements UserService {
 					user.setPassword(generatePassword("password"));
 					userRepository.save(user);
 					
-				    RegistrationResponseDto registrationResponseDto1 = new RegistrationResponseDto();
-					registrationResponseDto1.setUserId(user.getUserId());
-					registrationResponseDto1.setStatusCode(constants.SUCCESS_STATUS_CODE);
-					registrationResponseDto1.setStatusMessage(constants.SUCCESS_STATUS_MESSAGE);
+				    RegistrationResponseDto registrationResponseDto = new RegistrationResponseDto();
+					registrationResponseDto.setUserId(user.getUserId());
+					registrationResponseDto.setPassword(user.getPassword());
+					registrationResponseDto.setStatusCode(constants.SUCCESS_STATUS_CODE);
+					registrationResponseDto.setStatusMessage(constants.SUCCESS_STATUS_MESSAGE);
 					 
-					return registrationResponseDto1;
+					return registrationResponseDto;
 
 				} else {
 					throw new EmailException("Enter Valid Email...");
