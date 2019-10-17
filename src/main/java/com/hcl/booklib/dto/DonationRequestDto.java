@@ -19,4 +19,5 @@ public class DonationRequestDto implements Serializable{
 	private String categoryName;
 	
 	
+	
 }

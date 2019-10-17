@@ -15,4 +15,5 @@ public class DonationResponseDto implements Serializable{
     private Integer statusCode;
 	private String statusMessage;
 	
+	
 }
