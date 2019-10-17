@@ -15,7 +15,8 @@ import com.hcl.booklib.repository.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Abhishek BookServiceImpl will fetch books details from bookRepository
+ * @author Abhishek 
+ * BookServiceImpl will fetch books details from bookRepository
  *         by passing bookName
  *
  */

@@ -5,6 +5,10 @@ import java.util.List;
 import com.hcl.booklib.entity.Book;
 import com.hcl.booklib.entity.Category;
 
+/**
+ * @author Abhishek
+ *
+ */
 public interface CategoryService {
 	
 //	List<Book> booksUnderCategory(Integer categoryId);
