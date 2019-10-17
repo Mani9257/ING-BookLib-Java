@@ -1,9 +1,5 @@
 package com.hcl.booklib.controller;
 
-
-
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +15,15 @@ import com.hcl.booklib.dto.RegistrationResponseDto;
 import com.hcl.booklib.dto.UserDetailsDto;
 import com.hcl.booklib.service.UserService;
 
-
-
-
-
 @RestController
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 @RequestMapping("/")
 public class RegistrationController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationController.class);
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@PostMapping("/registration")
 	public ResponseEntity<RegistrationResponseDto> registration(@RequestBody UserDetailsDto userDetailsDto) {
 		LOGGER.info("inside registration");

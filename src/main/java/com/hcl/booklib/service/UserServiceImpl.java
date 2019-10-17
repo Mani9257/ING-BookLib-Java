@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
 				RegistrationResponseDto registrationResponseDto = new RegistrationResponseDto();
 				registrationResponseDto.setUserId(user.getUserId());
-				
+
 				registrationResponseDto.setStatusCode(LibraryConstants.SUCCESS_STATUS_CODE);
 				registrationResponseDto.setStatusMessage(LibraryConstants.SUCCESS_STATUS_MESSAGE);
 

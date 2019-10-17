@@ -49,7 +49,8 @@ public class SchedulerServiceImpl implements SchedulerService {
 				updateborrowedBooks.add(borrowedBook);
 				if (daysLeft == 0) {
 
-					BookBorrow requestedBook = borrowBookRepository.findByBorrowStatusAndBookId(borrowedBook.getBookId());
+					BookBorrow requestedBook = borrowBookRepository
+							.findByBorrowStatusAndBookId(borrowedBook.getBookId());
 
 					log.info("BorrowedDate={}", requestedBook.getBorrowedDate());
 					requestedBook.setBorrowStatus(ExceptionConstants.BORROW_BOOK_STATUS_BORROWED);
@@ -58,8 +59,6 @@ public class SchedulerServiceImpl implements SchedulerService {
 					updateborrowedBooks.add(borrowedBook);
 				}
 			}
-
-		
 
 			log.info("SchedulerServiceImpl :: runTask - borrowedBook : ");
 

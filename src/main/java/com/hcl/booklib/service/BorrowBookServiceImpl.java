@@ -35,14 +35,15 @@ public class BorrowBookServiceImpl implements BorrowBookService {
 
 		Optional<User> user = userRepository.findByUserId(userId);
 		Optional<Book> book = bookRepository.findByBookId(bookId);
-		Book book1 = book.get();
 
 		BorrowResponseDTO borrowResponseDTO = new BorrowResponseDTO();
 		BookBorrow bookBorrow = new BookBorrow();
 
 		if (user.isPresent()) {
 			if (book.isPresent()) {
+				Book book1 = book.get();
 				if (book.get().getBookStatus().equalsIgnoreCase(ExceptionConstants.BORROW_BOOK_STATUS_AVAILABLE)) {
+
 					borrowResponseDTO.setBorrowStatus(ExceptionConstants.BORROW_BOOK_STATUS_BORROWED);
 					borrowResponseDTO.setMessage(ExceptionConstants.SUCCESS_MESSAGE);
 					borrowResponseDTO.setStatusCode(ExceptionConstants.SUCCESS_STATUS_CODE);

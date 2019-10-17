@@ -13,41 +13,40 @@ import com.hcl.booklib.entity.Book;
 import com.hcl.booklib.repository.BookRepository;
 import com.hcl.booklib.repository.CategoryRepository;
 
-
-
 @Service
-public class DonationServiceImpl implements DonationService{
-	
+public class DonationServiceImpl implements DonationService {
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(DonationServiceImpl.class);
 
 	@Autowired
 	BookRepository bookRepository;
-	
+
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	@Autowired
 	LibraryConstants constants;
-	
-	
-@Override
+
+	@Override
 	public DonationResponseDto donation(DonationRequestDto donationRequestDto) {
-		
-		
+
 		Book book = null;
 		DonationResponseDto donationResponseDto = null;
-		
+
 		if (donationRequestDto != null) {
-			
+
 			book = new Book();
-			
+
 			BeanUtils.copyProperties(donationRequestDto, book);
-            bookRepository.save(book);
-           donationResponseDto = new DonationResponseDto();
-          
-            donationResponseDto.setStatusCode(constants.SUCCESS_STATUS_CODE);
-            donationResponseDto.setStatusMessage(constants.SUCCESS_DONATE_STATUS_MESSAGE);
+			bookRepository.save(book);
+			donationResponseDto = new DonationResponseDto();
+			LOGGER.info("INSIDE dONATION METHOD");
+
+			donationResponseDto.setStatusCode(LibraryConstants.SUCCESS_STATUS_CODE);
+			donationResponseDto.setStatusMessage(LibraryConstants.SUCCESS_DONATE_STATUS_MESSAGE);
 
 		}
-	
+
 		return donationResponseDto;
 	}
 
