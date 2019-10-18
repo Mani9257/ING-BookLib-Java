@@ -18,7 +18,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 	 * @param book_name
 	 * @return
 	 */
-	List<Book> findByBookNameStartsWith(String book_name);
+	List<Book> findByBookNameStartsWith(String bookName);
 
 	/**
 	 * @param categoryId

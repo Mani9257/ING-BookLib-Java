@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.hcl.booklib.dto.BorrowResponseDTO;
 import com.hcl.booklib.entity.Book;
 import com.hcl.booklib.entity.User;
+import com.hcl.booklib.exception.InvalidCredentialsException;
 import com.hcl.booklib.service.BorrowBookService;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
@@ -53,11 +54,12 @@ public class BookBorrowControllerTest {
 
 		borrowResponseDTO.setBorrowStatus("BORROWED");
 		borrowResponseDTO.setMessage("Success");
+
 		borrowResponseDTO.setStatusCode(HttpStatus.OK.value());
 	}
 
 	@Test
-	public void testBorrowBook() {
+	public void testBorrowBook() throws InvalidCredentialsException {
 
 		Mockito.when(borrowBookService.borowBook(Mockito.anyInt(), Mockito.anyInt())).thenReturn(borrowResponseDTO);
 		ResponseEntity<BorrowResponseDTO> responseDto = borrowBookController.borowBook(1, 1);

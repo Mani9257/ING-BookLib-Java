@@ -39,7 +39,7 @@ public class BookSearchController {
 	@GetMapping(value = "/books/{bookName}", produces = "application/json")
 	public ResponseEntity<List<Book>> getBooksByName(@PathVariable("bookName") String bookName) {
 		log.info("getting books{}", bookService.getAllBooksByName(bookName));
-		return new ResponseEntity<List<Book>>(bookService.getAllBooksByName(bookName), HttpStatus.OK);
+		return new ResponseEntity<>(bookService.getAllBooksByName(bookName), HttpStatus.OK);
 
 	}
 

@@ -27,21 +27,34 @@ public class LoginServiceImpl implements LoginService {
 	 *         and password for login
 	 * @param loginDto is the input request which includes userid and password
 	 * @return it returns "login successful" message
+	 * @throws UserDoesNotExistException 
 	 */
 
 	@Override
-	public LoginResponseDto loginUser(UserLoginDto loginDto) {
+	public LoginResponseDto loginUser(UserLoginDto loginDto) throws UserDoesNotExistException {
 
 		User user = userRepository.findByUserNameAndPassword(loginDto.getUserName(), loginDto.getPassword());
 		LOGGER.info("inside login");
-		if (user == null)
-			throw new UserDoesNotExistException("user doesnt exist");
+		if(user!=null) {
 
-		LoginResponseDto loginResponseDto1 = new LoginResponseDto();
-		loginResponseDto1.setUserId(user.getUserId());
-		loginResponseDto1.setStatusCode(LibraryConstants.SUCCESS_STATUS_CODE);
-		loginResponseDto1.setMessage(LibraryConstants.SUCCESS_STATUS_MESSAGE);
-		return loginResponseDto1;
+			if ( user.getPassword().equalsIgnoreCase(loginDto.getPassword()) && user.getUserName().equalsIgnoreCase(loginDto.getUserName() )) {
+				LoginResponseDto loginResponseDto1 = new LoginResponseDto();
+				loginResponseDto1.setUserId(user.getUserId());
+				loginResponseDto1.setStatusCode(LibraryConstants.SUCCESS_STATUS_CODE);
+				loginResponseDto1.setMessage(LibraryConstants.SUCCESS_STATUS_MESSAGE);
+				return loginResponseDto1;
+				
+				}
+			
+			else {
+				throw new UserDoesNotExistException("user doesnt exist");
+			
+		}}
+			
+	else {
+		throw new UserDoesNotExistException("user doesnt exist");
 	}
+	}
+
 
 }

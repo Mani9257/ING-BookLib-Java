@@ -2,7 +2,7 @@ package com.hcl.booklib.exception;
 
 
 
-public class UserDoesNotExistException extends RuntimeException {
+public class UserDoesNotExistException extends Exception {
 
 	/**
 	 * 

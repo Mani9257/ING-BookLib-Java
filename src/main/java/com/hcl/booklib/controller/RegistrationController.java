@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.booklib.dto.RegistrationResponseDto;
 import com.hcl.booklib.dto.UserDetailsDto;
+import com.hcl.booklib.exception.UserDoesNotExistException;
 import com.hcl.booklib.service.UserService;
 
 @RestController
@@ -25,7 +26,7 @@ public class RegistrationController {
 	UserService userService;
 
 	@PostMapping("/registration")
-	public ResponseEntity<RegistrationResponseDto> registration(@RequestBody UserDetailsDto userDetailsDto) {
+	public ResponseEntity<RegistrationResponseDto> registration(@RequestBody UserDetailsDto userDetailsDto) throws UserDoesNotExistException {
 		LOGGER.info("inside registration");
 		RegistrationResponseDto registrationResponseDto = userService.registration(userDetailsDto);
 		return new ResponseEntity<>(registrationResponseDto, HttpStatus.CREATED);

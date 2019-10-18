@@ -4,7 +4,7 @@ package com.hcl.booklib.exception;
  * @author Sushil
  *
  */
-public class InvalidCredentialsException extends RuntimeException{
+public class InvalidCredentialsException extends Exception{
 
 	/**
 	 * 

@@ -31,7 +31,7 @@ public class BorrowBookServiceImpl implements BorrowBookService {
 	@Autowired
 	private ExceptionConstants exceptionConstants;
 
-	public BorrowResponseDTO borowBook(int userId, int bookId) {
+	public BorrowResponseDTO borowBook(int userId, int bookId) throws InvalidCredentialsException {
 
 		Optional<User> user = userRepository.findByUserId(userId);
 		Optional<Book> book = bookRepository.findByBookId(bookId);

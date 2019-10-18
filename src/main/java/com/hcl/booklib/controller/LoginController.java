@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.booklib.dto.LoginResponseDto;
 import com.hcl.booklib.dto.UserLoginDto;
+import com.hcl.booklib.exception.UserDoesNotExistException;
 import com.hcl.booklib.service.LoginServiceImpl;
 
 @RestController
@@ -27,7 +28,7 @@ public class LoginController {
 	LoginServiceImpl loginServiceImpl;
 
 	@PostMapping("/login")
-	public ResponseEntity<LoginResponseDto> loginUser(@RequestBody UserLoginDto loginDto) {
+	public ResponseEntity<LoginResponseDto> loginUser(@RequestBody UserLoginDto loginDto) throws UserDoesNotExistException {
 		logger.info("in login customer method");
 		LoginResponseDto response = loginServiceImpl.loginUser(loginDto);
 		return new ResponseEntity<>(response, HttpStatus.OK);

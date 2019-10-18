@@ -14,7 +14,7 @@ public class CategoryResponseDto implements Serializable {
 
 	private static final long serialVersionUID = 1;
 
-	List<String> categoryName;
+	private List<String> categoryName;
 	private Integer statusCode;
 	private String message;
 

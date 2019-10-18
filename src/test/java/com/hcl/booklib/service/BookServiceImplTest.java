@@ -1,11 +1,11 @@
 package com.hcl.booklib.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -20,92 +20,78 @@ import com.hcl.booklib.repository.BookRepository;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BookServiceImplTest {
 
-	@Mock
-	BookRepository bookRepository;
+@Mock
+BookRepository bookRepository;
 
-	@InjectMocks
-	BookServiceImpl bookServiceImpl;
+@InjectMocks
+BookServiceImpl bookServiceImpl;
 
-	@Test
-	public void testgetAllBooksByName() {
+Book book = new Book();
+Book book1 = new Book();
+List<Book> bookList = new ArrayList<>();
 
-		Book book = new Book();
-		book.setBookId(1);
-		book.setBookName("why i am good");
-		book.setBookStatus("available");
-		book.setCategoryId(10);
+@Before
+public void setup() {
 
-		Book book1 = new Book();
-		book1.setBookId(2);
-		book1.setBookName("why i am perfect");
-		book1.setBookStatus("available");
-		book1.setCategoryId(11);
+book.setBookId(1);
+book.setBookName("why i am good");
+book.setBookStatus("available");
+book.setCategoryId(10);
 
-		List<Book> bookList = new ArrayList<Book>();
+book1.setBookId(2);
+book1.setBookName("why i am perfect");
+book1.setBookStatus("available");
+book1.setCategoryId(11);
 
-		bookList.add(book);
-		bookList.add(book1);
+}
 
-		Mockito.when(bookRepository.findByBookNameStartsWith(Mockito.anyString())).thenReturn(bookList);
+@Test
+public void testGetAllBooksByName() {
 
+bookList.add(book);
+bookList.add(book1);
 
-		List<Book> response=bookServiceImpl.getAllBooksByName(Mockito.anyString());
-		assertEquals(bookList.size(), response.size());
-	}
+Mockito.when(bookRepository.findByBookNameStartsWith("why")).thenReturn(bookList);
 
-	@Test
-	public void testGetBooksByCategory() {
+List<Book> bookList1 = bookServiceImpl.getAllBooksByName("why");
+assertEquals(bookList1, bookList);
 
-		Book book = new Book();
-		book.setBookId(1);
-		book.setBookName("why i am good");
-		book.setBookStatus("available");
-		book.setCategoryId(11);
+}
 
-		Book book1 = new Book();
-		book1.setBookId(2);
-		book1.setBookName("why i am perfect");
-		book1.setBookStatus("available");
-		book1.setCategoryId(11);
+@Test(expected = NoBookFound.class)
+public void testgetAllBooksByNameIfNotAvailable() {
 
-		List<Book> bookList = new ArrayList<Book>();
+Mockito.when(bookRepository.findByBookNameStartsWith("po")).thenReturn(bookList);
 
-		bookList.add(book);
-		bookList.add(book1);
+List<Book> bookList1 = bookServiceImpl.getAllBooksByName(null);
+assertEquals(null, bookList1.size());
 
-		Mockito.when(bookRepository.findBookByCategoryId(11)).thenReturn(bookList);
-		
-		List<Book> response=bookServiceImpl.getBooksByCategory(11);
-		assertEquals(bookList.size(), response.size());
+}
 
+@Test
+public void testGetBooksByCategory() {
 
-	}
+bookList.add(book);
+bookList.add(book1);
 
-	@Test
-	public void testGetAllBooks() {
+Mockito.when(bookRepository.findBookByCategoryId(11)).thenReturn(bookList);
 
-		Book book = new Book();
-		book.setBookId(1);
-		book.setBookName("why i am good");
-		book.setBookStatus("available");
-		book.setCategoryId(11);
+List<Book> bookList1 = bookServiceImpl.getBooksByCategory(11);
 
-		Book book1 = new Book();
-		book1.setBookId(2);
-		book1.setBookName("why i am perfect");
-		book1.setBookStatus("available");
-		book1.setCategoryId(11);
+assertEquals(bookList1, bookList);
 
-		List<Book> bookList = new ArrayList<Book>();
+}
 
-		bookList.add(book);
-		bookList.add(book1);
+@Test
+public void testGetAllBooks() {
 
-		Mockito.when(bookRepository.findAll()).thenReturn(bookList);
+bookList.add(book);
+bookList.add(book1);
 
-		List<Book> bookList1 = bookServiceImpl.getAllBooks();
-		assertEquals(bookList, bookList1);
-		assertEquals(bookList.size(),bookList1.size());
-	}
+Mockito.when(bookRepository.findAll()).thenReturn(bookList);
+
+List<Book> bookList1 = bookServiceImpl.getAllBooks();
+assertEquals(bookList, bookList1);
+}
 
 }

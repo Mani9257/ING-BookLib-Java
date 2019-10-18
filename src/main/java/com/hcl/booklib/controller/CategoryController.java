@@ -38,7 +38,7 @@ public class CategoryController {
 	 */
 	@GetMapping(value = "/categories/{categoryId}")
 	public ResponseEntity<Category> getCategoryByCategoryId(@PathVariable("categoryId") Integer categoryId) {
-		return new ResponseEntity<Category>(categoryService.getCategoryById(categoryId), HttpStatus.OK);
+		return new ResponseEntity<>(categoryService.getCategoryById(categoryId), HttpStatus.OK);
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class CategoryController {
 	 */
 	@GetMapping(value = "/categories")
 	public ResponseEntity<List<Category>> getAllCategories() {
-		return new ResponseEntity<List<Category>>(categoryService.getAllCategory(), HttpStatus.OK);
+		return new ResponseEntity<>(categoryService.getAllCategory(), HttpStatus.OK);
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hcl.booklib.dto.CategoryResponseDto;
 import com.hcl.booklib.dto.DonationRequestDto;
 import com.hcl.booklib.dto.DonationResponseDto;
+import com.hcl.booklib.exception.UserDoesNotExistException;
 import com.hcl.booklib.service.CategoryService;
 import com.hcl.booklib.service.DonationService;
 
@@ -29,18 +30,34 @@ public class DonationController {
 
 	@Autowired
 	CategoryService categoryService;
-
+	
+	
+	
+/**
+ * 
+ * @return this method use to get all the categories
+ */
 	@GetMapping(value = "/donation/categories")
 	public ResponseEntity<CategoryResponseDto> getCategories() {
 		LOGGER.info("inside categories");
 		CategoryResponseDto categoryResponseDto = categoryService.getCategories();
 		return new ResponseEntity<>(categoryResponseDto, HttpStatus.CREATED);
 	}
+	
+	/**
+	 * 
+	 * @param donationRequestDto
+	 * @return this method is used to donate a book 
+	 * @throws UserDoesNotExistException
+	 */
 
 	@PostMapping("/donation")
-	public ResponseEntity<DonationResponseDto> donation(@RequestBody DonationRequestDto donationRequestDto) {
+	public ResponseEntity<DonationResponseDto> donation(@RequestBody DonationRequestDto donationRequestDto) throws UserDoesNotExistException {
 		LOGGER.info("inside registration");
-		DonationResponseDto donationResponseDto = donationService.donation(donationRequestDto);
+		DonationResponseDto donationResponseDto;
+	
+			donationResponseDto = donationService.donation(donationRequestDto);
+		
 		return new ResponseEntity<>(donationResponseDto, HttpStatus.CREATED);
 	}
 

@@ -17,9 +17,9 @@ import com.hcl.booklib.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Abhishek 
- * 	this controller will fetch allBooks and book belongs to
+ *  this controller will fetch allBooks and book belongs to
  *         particular category
+ * @author Abhishek
  *
  */
 @RestController
@@ -36,11 +36,13 @@ public class BookController {
 
 	/**
 	 * @param categoryId
-	 * @return by taking categoryId it will show all the books belonging to that categoryId
+	 * @return by taking categoryId it will show all the books belonging to that
+	 *         categoryId
 	 */
 	@GetMapping(value = "/categories/{categoryId}/books")
 	public ResponseEntity<List<Book>> getBookByCategoryId(@PathVariable("categoryId") Integer categoryId) {
-		return new ResponseEntity<List<Book>>(bookService.getBooksByCategory(categoryId), HttpStatus.OK);
+		log.info("inside getBookBy Category Id method");
+		return new ResponseEntity<>(bookService.getBooksByCategory(categoryId), HttpStatus.OK);
 	}
 
 	/**
@@ -48,7 +50,7 @@ public class BookController {
 	 */
 	@GetMapping(value = "/books")
 	public ResponseEntity<List<Book>> getAllBooks() {
-		return new ResponseEntity<List<Book>>(bookService.getAllBooks(), HttpStatus.OK);
+		return new ResponseEntity<>(bookService.getAllBooks(), HttpStatus.OK);
 	}
 
 }

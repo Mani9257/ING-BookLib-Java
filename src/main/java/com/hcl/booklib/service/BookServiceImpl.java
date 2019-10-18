@@ -12,25 +12,29 @@ import com.hcl.booklib.repository.BookRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class BookServiceImpl.
+ *
  * @author Abhishek BookServiceImpl will fetch books details from bookRepository
  *         by passing bookName
- *
  */
 @Service
+
+/** The Constant log. */
 @Slf4j
 public class BookServiceImpl implements BookService {
 
-	/**
-	 * bookRepository will query to DB
-	 */
+	/** bookRepository will query to DB. */
 	@Autowired
 	private BookRepository bookRepository;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.hcl.booklib.service.BookService#getAllBooksByName(java.lang.String)
+	
+	/**
+	 * Gets the all books by name.
+	 *
+	 * @param bookName the book name
+	 * @return the all books by name
 	 */
 	@Override
 	public List<Book> getAllBooksByName(String bookName) {
@@ -45,6 +49,12 @@ public class BookServiceImpl implements BookService {
 		return findByBookName;
 	}
 
+	/**
+	 * Gets the books by category.
+	 *
+	 * @param categoryId the category id
+	 * @return the books by category
+	 */
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -57,6 +67,11 @@ public class BookServiceImpl implements BookService {
 		return bookRepository.findBookByCategoryId(categoryId);
 	}
 
+	/**
+	 * Gets the all books.
+	 *
+	 * @return the all books
+	 */
 	@Override
 	public List<Book> getAllBooks() {
 		return bookRepository.findAll();

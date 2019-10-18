@@ -1,6 +1,8 @@
 
 package com.hcl.booklib.service;
 
+import static org.junit.Assert.assertEquals;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +45,10 @@ public class SchedulerServiceTest {
 
 		Mockito.when(borrowBookRepository.findByBorrowStatusAndDaysLeft()).thenReturn(updateborrowedBooks);
 		Mockito.when(borrowBookRepository.findByBorrowStatusAndBookId(Mockito.anyInt())).thenReturn(bookBorrow);
-
+		
+		List<BookBorrow> response= borrowBookRepository.findByBorrowStatusAndDaysLeft();
+		assertEquals(updateborrowedBooks.size(), response.size());
+		BookBorrow response2= borrowBookRepository.findByBorrowStatusAndBookId(Mockito.anyInt());
+		assertEquals("Ajith",response2.getBookName());
 	}
 }

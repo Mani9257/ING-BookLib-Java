@@ -13,6 +13,7 @@ import com.hcl.booklib.dto.RegistrationResponseDto;
 import com.hcl.booklib.dto.UserDetailsDto;
 import com.hcl.booklib.entity.User;
 import com.hcl.booklib.exception.EmailException;
+import com.hcl.booklib.exception.UserDoesNotExistException;
 import com.hcl.booklib.repository.UserRepository;
 
 @Service
@@ -23,40 +24,44 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
 	LibraryConstants constants;
+	
 
 	SecureRandom random1 = new SecureRandom();
 
 	@Override
-	public RegistrationResponseDto registration(UserDetailsDto userDetailsDto) {
+	public RegistrationResponseDto registration(UserDetailsDto userDetailsDto) throws UserDoesNotExistException {
 		LOGGER.debug("UserServiceImpl of register()");
-
-		User user = null;
+		RegistrationResponseDto registrationResponseDto = new RegistrationResponseDto();
+		User user = new User();
 
 		if (userDetailsDto != null) {
 
 			if (emailValidation(userDetailsDto.getUserEmail())) {
 
-				user = new User();
+			
 
 				BeanUtils.copyProperties(userDetailsDto, user);
 
 				user.setPassword(generatePassword("password"));
 				userRepository.save(user);
 
-				RegistrationResponseDto registrationResponseDto = new RegistrationResponseDto();
+			
 				registrationResponseDto.setUserId(user.getUserId());
 
 				registrationResponseDto.setStatusCode(LibraryConstants.SUCCESS_STATUS_CODE);
 				registrationResponseDto.setStatusMessage(LibraryConstants.SUCCESS_STATUS_MESSAGE);
 
-				return registrationResponseDto;
+				
 
 			} else {
 				throw new EmailException("Enter Valid Email...");
 			}
 
 		}
-		return registration(null);
+		else {
+			throw new UserDoesNotExistException("");
+		}
+		return registrationResponseDto;
 	}
 
 	static boolean emailValidation(String email) {

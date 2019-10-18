@@ -11,6 +11,7 @@ import com.hcl.booklib.dto.DonationRequestDto;
 import com.hcl.booklib.dto.DonationResponseDto;
 import com.hcl.booklib.entity.Book;
 import com.hcl.booklib.entity.Category;
+import com.hcl.booklib.exception.UserDoesNotExistException;
 import com.hcl.booklib.repository.BookRepository;
 import com.hcl.booklib.repository.CategoryRepository;
 import com.hcl.booklib.util.ExceptionConstants;
@@ -33,15 +34,16 @@ public class DonationServiceImpl implements DonationService {
 	ExceptionConstants exceptionConstants;
 
 	@Override
-	public DonationResponseDto donation(DonationRequestDto donationRequestDto) {
+	public DonationResponseDto donation(DonationRequestDto donationRequestDto) throws UserDoesNotExistException {
 
 		Book book = null;
 		DonationResponseDto donationResponseDto = null;
 
 		if (donationRequestDto != null) {
 
-			book = new Book();
 			
+			book = new Book();
+	
 			Category category=categoryRepository.findByCategoryName(donationRequestDto.getCategoryName());
 			BeanUtils.copyProperties(donationRequestDto, book);
 			book.setBookStatus(ExceptionConstants.BORROW_BOOK_STATUS_AVAILABLE);
@@ -49,11 +51,14 @@ public class DonationServiceImpl implements DonationService {
 			book.setCategoryId(category.getCategoryId());
 			bookRepository.save(book);
 			donationResponseDto = new DonationResponseDto();
-			LOGGER.info("INSIDE dONATION METHOD");
-
+			LOGGER.info("INSIDE DONATION METHOD");
+			donationResponseDto.setBookId(book.getBookId());
 			donationResponseDto.setStatusCode(LibraryConstants.SUCCESS_STATUS_CODE);
 			donationResponseDto.setStatusMessage(LibraryConstants.SUCCESS_DONATE_STATUS_MESSAGE);
 
+		}
+		else {
+			throw new UserDoesNotExistException("Please enter details of book which your donating");
 		}
 
 		return donationResponseDto;

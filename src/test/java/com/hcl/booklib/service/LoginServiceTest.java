@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.hcl.booklib.dto.LoginResponseDto;
 import com.hcl.booklib.dto.UserLoginDto;
 import com.hcl.booklib.entity.User;
+import com.hcl.booklib.exception.UserDoesNotExistException;
 import com.hcl.booklib.repository.UserRepository;
 
 @RunWith(SpringRunner.class)
@@ -22,28 +23,37 @@ public class LoginServiceTest {
 
 	@Mock
 	UserRepository userRepository;
+	
+	LoginResponseDto loginResponseDto = new LoginResponseDto();
+	User user = new User();
+	User user2 = new User();
+
+	UserLoginDto loginDto = new UserLoginDto();
+	UserLoginDto loginDto2 = new UserLoginDto();
 
 	@Before
-	public void init() {
+	public void setUp() {
+		
 
-	}
-
-	@Test
-	public void login() {
-
-		LoginResponseDto loginResponseDto = new LoginResponseDto();
+		
 		loginResponseDto.setMessage("Successful");
 		loginResponseDto.setStatusCode(200);
 		loginResponseDto.setUserId(1);
 
-		User user = new User();
+		
+		
 		user.setPassword("Suchita");
 		user.setUserId(1);
 		user.setUserName("Suchita");
 
-		UserLoginDto loginDto = new UserLoginDto();
 		loginDto.setPassword("Suchita");
 		loginDto.setUserName("Suchita");
+
+	}
+
+	@Test
+	public void login() throws UserDoesNotExistException {
+
 
 		Mockito.when(userRepository.findByUserNameAndPassword(Mockito.anyString(), Mockito.anyString()))
 				.thenReturn(user);
@@ -51,4 +61,17 @@ public class LoginServiceTest {
 		Assert.assertEquals("Successful", actualValue.getMessage());
 
 	}
+	
+	@Test(expected = UserDoesNotExistException.class)
+	public void loginInvalid() throws UserDoesNotExistException {
+
+
+		Mockito.when(userRepository.findByUserNameAndPassword(Mockito.anyString(), Mockito.anyString()))
+				.thenReturn(user2);
+		LoginResponseDto actualValue = LoginServiceImpl.loginUser(loginDto2);
+		Assert.assertEquals("Successful", actualValue.getMessage());
+
+	}
+	
+	
 }

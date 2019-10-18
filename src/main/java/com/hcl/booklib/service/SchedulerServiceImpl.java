@@ -55,6 +55,8 @@ public class SchedulerServiceImpl implements SchedulerService {
 					log.info("BorrowedDate={}", requestedBook.getBorrowedDate());
 					requestedBook.setBorrowStatus(ExceptionConstants.BORROW_BOOK_STATUS_BORROWED);
 					borrowBookRepository.save(requestedBook);
+					
+					
 					borrowedBook.setBorrowStatus(ExceptionConstants.BORROW_BOOK_STATUS_SUBMITTED);
 					updateborrowedBooks.add(borrowedBook);
 				}

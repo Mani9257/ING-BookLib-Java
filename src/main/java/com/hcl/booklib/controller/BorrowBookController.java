@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.booklib.dto.BorrowResponseDTO;
+import com.hcl.booklib.exception.InvalidCredentialsException;
 import com.hcl.booklib.service.BorrowBookService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,9 +30,10 @@ public class BorrowBookController {
 	private BorrowBookService borrowBookService;
 
 	@PutMapping("users/{userId}/books/{bookId}/borrow")
-	public ResponseEntity<BorrowResponseDTO> borowBook(@PathVariable int userId, @PathVariable int bookId) {
+	public ResponseEntity<BorrowResponseDTO> borowBook(@PathVariable int userId, @PathVariable int bookId) throws InvalidCredentialsException  {
 		log.info("borowBook-->");
 		BorrowResponseDTO borrowedBook = borrowBookService.borowBook(userId, bookId);
+	
 		return new ResponseEntity<>(borrowedBook, HttpStatus.OK);
 	}
 }

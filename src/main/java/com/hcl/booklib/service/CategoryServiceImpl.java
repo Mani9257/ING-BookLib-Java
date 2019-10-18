@@ -21,7 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 
-	CategoryRepository categoryrepository;
+	
 
 	private CategoryRepository categoryRepository;
 
