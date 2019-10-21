@@ -2,11 +2,11 @@ node('master')
 {
 stage('git checkout')
 {
-git 'https://github.com/Mani9257/ING-BookLib-Java.git'​
+git 'https://github.com/Mani9257/ING-BookLib-Java.git'
 }
 stage('java build')
 {
-sh '/opt/maven/bin/mvn clean install deploy sonar:sonar -Dsonar.password=admin -Dsonar.login=admin'​
+sh '/opt/maven/bin/mvn clean install sonar:sonar -Dsonar.password=admin -Dsonar.login=admin'​
 }
 stage('Running java backend application')
 {
