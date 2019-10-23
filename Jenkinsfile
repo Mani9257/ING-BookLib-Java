@@ -21,6 +21,13 @@ sh '/opt/maven/bin/mvn clean package verify sonar:sonar -Dsonar.password=admin -
               }
           }
       }
+   stage('Deploy')
+
+{
+
+sh '/opt/maven/bin/mvn clean deploy '
+
+}
   stage('Running java backend application')
 
 {
