@@ -9,7 +9,7 @@ stage('java build')
 sh '/opt/maven/bin/mvn clean package verify sonar:sonar -Dsonar.password=admin -Dsonar.login=admin'
 }
    stage("build & SonarQube analysis") {
-              withSonarQubeEnv(‘sonar') {
+              withSonarQubeEnv('sonar') {
                  sh '/opt/maven/bin/mvn clean package sonar:sonar'
               }
           }
